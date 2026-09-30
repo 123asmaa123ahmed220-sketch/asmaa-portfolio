@@ -283,10 +283,56 @@
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const submitLabel = document.getElementById('contact-submit-label');
+    const status = document.getElementById('contact-status');
+    const fields = [...contactForm.querySelectorAll('.form-control')];
+    let isSending = false;
+
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      showToast('Thank you! Your message has been prepared for transmission.');
-      contactForm.reset();
+      if (isSending) return;
+      fields.forEach((field) => { field.value = field.value.trim(); });
+      if (!contactForm.reportValidity()) return;
+      if (contactForm.elements.namedItem('botcheck').checked) return;
+
+      const payload = Object.fromEntries(new FormData(contactForm));
+      delete payload.redirect;
+      isSending = true;
+      submitButton.disabled = true;
+      submitLabel.textContent = 'Sending...';
+      fields.forEach((field) => { field.readOnly = true; });
+      contactForm.setAttribute('aria-busy', 'true');
+      status.dataset.state = 'pending';
+      status.textContent = 'Sending your message...';
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        const result = await response.json();
+        if (!response.ok || result.success !== true) throw new Error('Submission rejected');
+        status.dataset.state = 'success';
+        status.textContent = 'Thank you! Your message was submitted successfully.';
+        contactForm.reset();
+      } catch (error) {
+        status.dataset.state = 'error';
+        status.textContent = error.name === 'AbortError'
+          ? 'Confirmation took too long. Your message may have been submitted. Your text is still here; please wait before trying again.'
+          : 'We could not confirm your submission. Your text is still here. Please try again or email 123asmaa123ahmed22.0@gmail.com.';
+      } finally {
+        clearTimeout(timeout);
+        isSending = false;
+        submitButton.disabled = false;
+        submitLabel.textContent = 'Send Message';
+        fields.forEach((field) => { field.readOnly = false; });
+        contactForm.removeAttribute('aria-busy');
+      }
     });
   }
 
