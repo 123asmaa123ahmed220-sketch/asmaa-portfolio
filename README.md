@@ -49,7 +49,7 @@ There is no framework, package manager configuration, bundler, database, or cust
 | Projects | Three cards and shared detail dialog | Replace screenshot placeholders and profile-level GitHub links |
 | Contact form | Web3Forms integration, validation, sending state, error feedback, and basic honeypot | Confirm actual inbox delivery with an end-to-end submission |
 | Navigation and motion | Mobile menu, active section highlighting, scroll reveal, and interactive canvas | Verify layouts across screen sizes and improve keyboard handling |
-| Search and sharing | Title, description, sharing text, and Person structured data | Add a sharing image and canonical URL |
+| Search and sharing | Title, description, Person structured data, canonical URL, and Open Graph/Twitter image metadata | Verify previews on sharing platforms after deployment |
 | Verification | No committed automated test suite or custom build pipeline | Add focused checks for important interactions |
 
 The canvas respects reduced-motion preferences and pauses when the hero is off-screen. Dialogs support Escape and restore focus to the trigger, but focus containment and hidden-state accessibility still need work.
@@ -71,7 +71,8 @@ asmaa-portfolio/
 │   └── main.js                # Project data, navigation, dialogs, and contact logic
 └── assets/
     ├── images/
-    │   └── logo.png           # Transparent header/footer logo
+    │   ├── logo.png           # Transparent header/footer logo
+    │   └── social-preview.png # Alternative 1200 × 630 sharing card
     └── icons/
         ├── favicon.ico        # 16, 32, 48, 64, 128, and 256 px frames
         └── favicon.png        # 256 px PNG companion
@@ -122,6 +123,7 @@ The access key is designed for browser-side use and is not a secret email passwo
 | Layout and responsive behavior | `css/components.css` and `css/responsive.css` |
 | Logo | `assets/images/logo.png` |
 | Favicon | `assets/icons/favicon.ico` and its PNG companion |
+| Social preview | `assets/images/logo.png` and sharing metadata in `index.html`; `social-preview.png` is an available alternative |
 
 After replacing branding assets, increment their URL query versions in `index.html` so browsers request the new files. Preserve relative asset paths so the site continues to work under the `/asmaa-portfolio/` GitHub Pages path.
 
@@ -132,6 +134,12 @@ The portfolio is hosted at **[the live GitHub Pages site](https://123asmaa123ahm
 Commit and push the intended changes to the repository's configured Pages publishing source, then check the deployment result on GitHub. Confirm the publishing branch/folder or workflow under **Settings → Pages** rather than assuming the current local branch is the deployment source. Once deployment succeeds, check the live URL for the updated content and assets.
 
 See [GitHub's publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) for configuration details.
+
+### Social sharing previews
+
+The page includes Open Graph and Twitter card metadata with absolute HTTPS URLs to the production page and the 500 × 500 AA logo. The square image and short description are intended for compact link previews; each sharing platform controls the final layout. Twitter uses the `summary` card. An alternative 1200 × 630 design is available in `assets/images/social-preview.png`, but it is not currently referenced by the sharing tags.
+
+After deployment, check that the image URL opens publicly and that the deployed page source contains the new tags, then share the portfolio in a new message. Sharing platforms may retain older previews; local changes alone do not refresh their caches. Actual WhatsApp preview behavior still needs a check after deployment. If replacing the image later, use a new image filename or URL version and update both image tags.
 
 ### Validation
 
@@ -157,6 +165,5 @@ These are suggestions for future work, not completed features or a committed sch
 | Medium | Test navigation at intermediate widths and course/contact cards on narrow screens | Resolve layout pressure across devices |
 | Medium | Move featured projects earlier and reduce repeated introductory copy | Help visitors reach the work faster |
 | Medium | Add a downloadable CV when the file is supplied | Give recruiters a convenient offline reference |
-| Medium | Add a social preview image and canonical production URL | Improve link previews and page identity |
 | Later | Consolidate project data and move inline styling into CSS | Reduce duplication and simplify maintenance |
 | Later | Add focused interaction checks and tune font/canvas performance after measurement | Catch regressions and improve loading/rendering behavior |
