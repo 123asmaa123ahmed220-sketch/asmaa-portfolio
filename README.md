@@ -1,75 +1,162 @@
-# Asmaa Ahmed Salah — AI & Data Science Portfolio Website
+# Asmaa Ahmed Salah — AI & Data Science Portfolio
 
-A modern, creative, premium personal portfolio website designed for **Asmaa Ahmed Salah**, showcasing real coursework, training, projects, and competencies in **Data Science, Data Analytics, Machine Learning, and Database Architecture**.
+## Visit the portfolio
 
----
+**[Open the live portfolio →](https://123asmaa123ahmed220-sketch.github.io/asmaa-portfolio/)**
 
-## 🌟 Overview & Key Highlights
+Explore Asmaa's background, education, training, technical skills, and data projects, or find her contact details. The portfolio runs in your browser — no downloads or setup needed.
 
-- **Design Aesthetic**: Premium Minimal × Data/AI (Sophisticated dark palette `#0A0D14`, subtle electric cyan accents, generous whitespace, crisp modern typography).
-- **Owner**: Asmaa Ahmed Salah — AI & Data Science Student at *Modern Academy for Engineering & Technology*.
-- **Practical Experience**: AI & Data Science Trainee at *Digital Egypt Pioneers Initiative (DEPI)*.
-- **Real Projects Featured**:
-  1. **Amazon Sales Data Analysis** (*Excel, Pivot Tables, Pivot Charts, Dashboards*)
-  2. **Hotel Booking Analysis** (*Power BI, Python, Pandas, Matplotlib*)
-  3. **Online Course Platform Database Project** (*SQL, Database Design, Relational Modeling*)
-- **Courses & Training**:
-  - *AI & Data Science Diploma* – Instant Academy (Feb 2026 – Present)
-  - *AI Training* – EraaSoft (Jun 2026 – Jul 2026)
-- **Conceptual Workflow**: "How I Think" 5-step visual pipeline (**01 Explore → 02 Clean → 03 Analyze → 04 Visualize → 05 Learn**).
-- **Subtle Data Canvas**: Lightweight mathematical latent space graph in the hero section that gently interacts with mouse proximity, respects `prefers-reduced-motion`, and pauses off-screen.
-- **Zero Fictional Data / No Placeholders**: Every section uses real, verified details with clickable `mailto:` and `tel:` links.
+| Featured project | What it covers |
+| --- | --- |
+| Amazon Sales Data Analysis | Sales insights using Excel, Pivot Tables, and dashboards |
+| Hotel Booking Analysis | Booking patterns and metrics using Power BI and Python |
+| Online Course Platform Database | Database design, relational modeling, and SQL |
+
+Looking for the code? Continue to the [developer documentation](#developer-documentation) below.
 
 ---
 
-## 📁 Project Structure
+## Developer documentation
 
-```
-protfolio/
-├── index.html                  # Semantic markup, SEO meta tags & JSON-LD schema
-├── README.md                   # Project documentation & deployment guide
+This repository contains the website for the portfolio, including its page content, styles, interactions, and branding assets. The datasets, notebooks, Power BI files, and SQL implementations of the featured projects are not included here.
+
+**Production site:** [Asmaa's portfolio on GitHub Pages](https://123asmaa123ahmed220-sketch.github.io/asmaa-portfolio/)
+
+**Repository:** [asmaa-portfolio](https://github.com/123asmaa123ahmed220-sketch/asmaa-portfolio)
+
+The documentation below describes the current source tree. Local changes appear on the live site only after they are committed, pushed to the configured publishing source, and successfully deployed.
+
+### Technology stack
+
+| Technology | Role |
+| --- | --- |
+| HTML5 | Single-page content, forms, metadata, and Person JSON-LD |
+| CSS3 | Design tokens, Grid/Flexbox layouts, responsive styling, and animations |
+| Vanilla JavaScript | Navigation, project dialogs, scroll effects, and contact handling |
+| Canvas 2D | Interactive particle background in the hero section |
+| Web3Forms | External contact form endpoint; no application backend in this repository |
+| Google Fonts | Plus Jakarta Sans and JetBrains Mono, with system font fallbacks |
+| GitHub Pages | Static website hosting |
+
+There is no framework, package manager configuration, bundler, database, or custom build step. Node.js is optional for syntax checks; Python is only one way to serve the files locally. Neither is needed by the deployed site.
+
+### Current status
+
+| Area | Current implementation | Remaining work |
+| --- | --- | --- |
+| Content | Hero, workflow, about/education, DEPI experience, skills, projects, courses, and contact | Keep profile and training details current |
+| Branding | Transparent AA logo in header/footer; multi-size ICO favicon | Check appearance at small sizes after asset changes |
+| Projects | Three cards and shared detail dialog | Replace screenshot placeholders and profile-level GitHub links |
+| Contact form | Web3Forms integration, validation, sending state, error feedback, and basic honeypot | Confirm actual inbox delivery with an end-to-end submission |
+| Navigation and motion | Mobile menu, active section highlighting, scroll reveal, and interactive canvas | Verify layouts across screen sizes and improve keyboard handling |
+| Search and sharing | Title, description, sharing text, and Person structured data | Add a sharing image and canonical URL |
+| Verification | No committed automated test suite or custom build pipeline | Add focused checks for important interactions |
+
+The canvas respects reduced-motion preferences and pauses when the hero is off-screen. Dialogs support Escape and restore focus to the trigger, but focus containment and hidden-state accessibility still need work.
+
+### Current structure
+
+```text
+asmaa-portfolio/
+├── index.html                 # Content, metadata, project dialog, and contact form
+├── README.md
 ├── css/
-│   ├── style.css               # Main orchestrator stylesheet
-│   ├── tokens.css              # Design tokens (colors, typography, spacing)
-│   ├── base.css                # Base reset, ambient mesh, container styles
-│   ├── components.css          # Navigation, hero, cards, modals, timeline, form
-│   └── responsive.css          # Mobile drawer & tablet/desktop breakpoints
+│   ├── style.css              # Imports the other stylesheets
+│   ├── tokens.css             # Shared colors, typography, spacing, and sizes
+│   ├── base.css               # Reset, backgrounds, layout, and reduced motion
+│   ├── components.css         # Navigation, cards, dialog, form, and notifications
+│   └── responsive.css         # Tablet and mobile adjustments
 ├── js/
-│   ├── hero-canvas.js          # Subtle 60 FPS interactive data canvas
-│   └── main.js                 # Modal dialogs, scrollspy, copy tools, scroll-reveal
+│   ├── hero-canvas.js         # Canvas rendering and animation lifecycle
+│   └── main.js                # Project data, navigation, dialogs, and contact logic
 └── assets/
-    ├── images/                 # Destination for real notebook / Power BI / Excel screenshots
-    └── icons/                  # SVG icons
+    ├── images/
+    │   └── logo.png           # Transparent header/footer logo
+    └── icons/
+        ├── favicon.ico        # 16, 32, 48, 64, 128, and 256 px frames
+        └── favicon.png        # 256 px PNG companion
 ```
 
----
+`index.html` loads `css/style.css`, which imports the four styling layers. The two JavaScript files run directly in the browser. Project card content lives in HTML, while the dialog content lives in the `projectCaseStudies` object in `js/main.js`; both need to stay consistent.
 
-## 🚀 How to Run Locally
+### Run locally
 
-You can run this site instantly without installing any node modules or compilers:
+From the repository root, with Python 3 installed:
 
-### Using Python:
-```bash
-# In your terminal inside f:/protfolio
-python -m http.server 8000
+```sh
+python -m http.server 8000 --bind 127.0.0.1
 ```
-Then open `http://localhost:8000` in your web browser.
 
----
+On Windows, you can use `py` instead of `python` if the Python launcher is installed. Open [localhost:8000](http://localhost:8000) and stop the server with `Ctrl+C`. Any equivalent static HTTP server also works.
 
-## 🌐 Deploying to GitHub Pages (Free & Instant)
+Internet access is needed for Google Fonts and actual contact submissions. There are no dependencies to install for the website itself.
 
-Since this repository contains no build tools, it is 100% ready for GitHub Pages:
+### Contact form configuration
 
-1. Push this folder to your GitHub repository:
-   ```bash
-   git init
-   git add .
-   git commit -m "Complete portfolio for Asmaa Ahmed Salah"
-   git branch -M main
-   git remote add origin https://github.com/123asmaa123ahmed220-sketch/<your-repo-name>.git
-   git push -u origin main
-   ```
-2. In your GitHub repository settings, go to **Pages** (under the "Code and automation" section).
-3. Under **Branch**, select `main` and root `/`, then click **Save**.
-4. Your portfolio will be live at `https://123asmaa123ahmed220-sketch.github.io/<your-repo-name>/` in under a minute!
+The form's `action`, public `access_key`, subject, and sender display name are configured in `index.html`. The handler in `js/main.js` sends JSON to `https://api.web3forms.com/submit`.
+
+1. Trim input, run browser validation, and check the hidden honeypot.
+2. Disable the submit button and make the fields read-only while sending.
+3. Clear the form only after an HTTP success response with `success: true`.
+4. Preserve entered text on failure and restore the controls.
+5. Stop waiting after 20 seconds and explain that submission may still have occurred.
+
+Progress and results are announced through an inline live status region. API acceptance does not confirm inbox delivery; an actual receiving-inbox check is still pending.
+
+**Recipient:** the intended receiving address is `123asmaa123ahmed22.0@gmail.com`. The email associated with the Web3Forms access key determines where messages go. Confirm that the configured key is associated with this address.
+
+**Changing the recipient:** create and verify an access key for the new email, replace the form's `access_key` in `index.html`, and update the fallback address in the error message in `js/main.js`.
+
+**Public contact address:** `123asma123aahmed123@gmail.com` is still used in the visible contact card, `mailto:` link, Person structured data, and copy-email helper. Those are separate from the form recipient and should be updated together if the public contact address changes.
+
+The access key is designed for browser-side use and is not a secret email password. See the [Web3Forms FAQ](https://docs.web3forms.com/getting-started/faq) and [setup documentation](https://docs.web3forms.com/getting-started/installation).
+
+### Maintenance guide
+
+| Change | Files or locations |
+| --- | --- |
+| Profile, training, education, skills, and public links | `index.html` |
+| Project descriptions and links | Project cards in `index.html` and `projectCaseStudies` in `js/main.js` |
+| Project screenshots | Add assets, then replace card and dialog placeholders |
+| Colors, typography, and shared values | `css/tokens.css` |
+| Layout and responsive behavior | `css/components.css` and `css/responsive.css` |
+| Logo | `assets/images/logo.png` |
+| Favicon | `assets/icons/favicon.ico` and its PNG companion |
+
+After replacing branding assets, increment their URL query versions in `index.html` so browsers request the new files. Preserve relative asset paths so the site continues to work under the `/asmaa-portfolio/` GitHub Pages path.
+
+### Publishing updates
+
+The portfolio is hosted at **[the live GitHub Pages site](https://123asmaa123ahmed220-sketch.github.io/asmaa-portfolio/)**.
+
+Commit and push the intended changes to the repository's configured Pages publishing source, then check the deployment result on GitHub. Confirm the publishing branch/folder or workflow under **Settings → Pages** rather than assuming the current local branch is the deployment source. Once deployment succeeds, check the live URL for the updated content and assets.
+
+See [GitHub's publishing-source documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) for configuration details.
+
+### Validation
+
+Optional syntax checks, with Node.js installed:
+
+```sh
+node --check js/main.js
+node --check js/hero-canvas.js
+```
+
+Before publishing changes, check mobile/tablet/desktop layouts, project dialogs, navigation, branding, keyboard interaction, and reduced-motion behavior. For contact changes, submit an intentional test message and verify the receiving inbox; also test failed requests and confirm the entered message is retained. Syntax checks alone do not verify these behaviors.
+
+### Proposed improvements
+
+These are suggestions for future work, not completed features or a committed schedule.
+
+| Priority | Improvement | Intended benefit |
+| --- | --- | --- |
+| High | Add real project screenshots, individual repository links, and supported findings | Make the work easier to inspect and evaluate |
+| High | Confirm contact delivery and decide whether to align public and receiving emails | Make communication reliable and consistent |
+| High | Contain dialog focus and remove closed dialogs/menus from keyboard navigation | Improve keyboard and assistive-technology access |
+| High | Make content visible by default when JavaScript is unavailable | Avoid hiding essential content if scripts fail |
+| Medium | Test navigation at intermediate widths and course/contact cards on narrow screens | Resolve layout pressure across devices |
+| Medium | Move featured projects earlier and reduce repeated introductory copy | Help visitors reach the work faster |
+| Medium | Add a downloadable CV when the file is supplied | Give recruiters a convenient offline reference |
+| Medium | Add a social preview image and canonical production URL | Improve link previews and page identity |
+| Later | Consolidate project data and move inline styling into CSS | Reduce duplication and simplify maintenance |
+| Later | Add focused interaction checks and tune font/canvas performance after measurement | Catch regressions and improve loading/rendering behavior |
